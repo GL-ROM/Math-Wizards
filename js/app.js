@@ -5,6 +5,7 @@ $(() => {
 
     // Global Use Variables
     const questionArray = [];
+    const answerArray = [];
 
     // Functions for the Game to run (mostly put inside of objects to call)
     // Object containing my event handlers for DOM
@@ -29,6 +30,10 @@ $(() => {
             return false;
         },
 
+        difficultyLevel: () => {
+
+        },
+
         critQuestion: () => {
 
         },
@@ -42,8 +47,13 @@ $(() => {
             }
         },
 
-        evaluteQuestion: (event) => {
-            if(event === eval(questionArray[0])) {
+        generateRandoAns: () => {
+            answerArray.push(eval(questionArray[0]));
+
+        },
+
+        evaluteQuestion: (value) => {
+            if(value === eval(questionArray[0])) {
                 questionArray.shift();
                 return true;
             }
