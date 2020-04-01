@@ -7,3 +7,11 @@
 .modalcontainer {
     visibility: hidden;
 }
+
+.correctanswer {
+    background-color: chartreuse;
+}
+
+.wronganswer {
+    background-color: crimson;
+}

@@ -5,13 +5,25 @@
 // Global Use Variables
 let questionArray = [];
 let answerArray = [];
+let bossArray = [];
 let difficultyNumber = 10;
 let correctChoice = 0;
 
 // Functions for the Game to run (mostly put inside of objects to call)
 // Object containing my event handlers for DOM
 const EventHandlers = {
-
+    onClickCheckAnswer: (event) => {
+        console.log(correctChoice);
+        let $value = parseInt($(event.currentTarget).attr('value'));
+        if($value === correctChoice) {
+            $(event.currentTarget).attr('class', 'correctanswer');
+            App.addMana(hero);
+            // nextQuestion();
+        } else {
+            $(event.currentTarget).attr('class', 'wronganswer');
+            // nextQuestion();
+        }
+    },
 }
 
 // App logic and game events
@@ -22,10 +34,10 @@ const App = {
     },
     // Provides a random number up to the max supplied
     randoNum: (num) => {
-        return Math.floor(Math.random() * num);
+        return Math.floor(Math.random() * num + 1);
     },
     // Check if the next question will be a crit question (harder but worth more)
-    critCheck: (hero) => {
+    critCheck: () => {
         if (Math.random() <= hero.critChance) {
             return true;
         }
@@ -36,16 +48,17 @@ const App = {
 
     },
     // Contains an array of crit questions that will return once called instead of pulling from questionArray
+    // Optional function will try to fit in
     critQuestion: () => {
 
     },
     // Generate questions based on the operator of the boss also resets the question array to empty
     generateQuestion: (object) => {
         questionArray = [];
-        for(let i = 0; i < 10; i++) {
+        for(let i = 0; i < 20; i++) {
             let num1 = App.randoNum(difficultyNumber); 
             let num2 = App.randoNum(difficultyNumber);
-            if (object.operator === '/') {
+            if (object.operator === '/') { // If division boss ensure number can be divided evenly
                 if ((num1 % num2) !== 0) {
                     num1 = (num1*num2);
                 }
@@ -54,6 +67,8 @@ const App = {
             questionArray.push(addQuestion);
         }
     },
+    //
+    nextQuestion
     // Generate random wrong answers for choices and place them in array
     generateRandoAns: () => {
         correctChoice = eval(questionArray[0]); // Sets global variable to the correct answer for this case
@@ -72,7 +87,8 @@ const App = {
         for (let i = 0; i < array.length-1; i++) {
             for (let j = i+1; j < array.length; j++) {
                 if(array[i] === array[j]) {
-                    array[j] = App.randoNum(100);
+                    array[j] = App.randoNum(20);
+                    App.checkDuplicates(array);
                 }
             }
         }
@@ -106,6 +122,20 @@ const App = {
     // Starts the game
     gameStart: () => {
 
+    }
+}
+
+const UI = {
+    // Adds the question and then adds the buttons for the choices
+    addQuestionDiv: () => {
+        $('#question').append(`<div> ${questionArray[0]}`);
+        UI.addAnswerDiv();
+    },
+    // When called adds the array indices to buttons under the question
+    addAnswerDiv: () => {
+        for (let i = 0; i < answerArray.length; i++) {
+            $('.answercontainer').append(`<button class='answers' value='${answerArray[i]}'> ${answerArray[i]} </button>`);
+        }
     }
 }
 
@@ -170,4 +200,6 @@ console.log(correctChoice);
 
 // jQuery Onload
 $(() => {
+    UI.addQuestionDiv();
+    $('.answers').on('click', EventHandlers.onClickCheckAnswer);
 })
