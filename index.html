@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -19,6 +21,9 @@
     <!-- Game start message -->
     <div id="startgame" class="modalcontainer">
         <div class="startgame"></div>
+        <button class='button' id='easy'>EASY</button>
+        <button class='button' id='normal'>NORMAL</button>
+        <button class='button' id='hard'>HARD</button>
     </div>
 
     <!-- Game over message -->
@@ -31,6 +36,7 @@
             <div class="mana"></div>
             <div id="heroimg"></div>
         </div>
+        <div class="timer"></div>
         <div id="boss">
             <div class="mana"></div>
             <div id="bossimg"></div>
