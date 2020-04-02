@@ -13,12 +13,9 @@
         crossorigin="anonymous"></script>
     <script src="js/app.js"></script>
 </head>
-<header>
-    <h1>Math Wizards</h1>
-</header>
 <body>
     
-    <!-- Game start message -->
+    <!-- Game start message for modal-->
     <div id="startgame" class="modalcontainer">
         <div class="startgame"></div>
         <button class='button' id='easy'>EASY</button>
@@ -26,34 +23,37 @@
         <button class='button' id='hard'>HARD</button>
     </div>
 
-    <!-- Game over message -->
+    <!-- Game over message for Modal-->
     <div id="gameover" class="modalcontainer">
         <div class="gameover"></div>
     </div>
-
-    <div class="playarea">
-        <div id="hero">
-            <div class="mana-box">
-                <div class="mana-bar" style="width: 0%;"></div>
-                <div class="mana-bar-blue" style="width: 0%;"></div>
+    <div class="upperwrap">
+        <h1>Title</h1>
+        <div class="playarea">
+            <div id="hero">
+                <div class="mana-box">
+                    <div class="mana-bar" style="width: 0%;"></div>
+                    <div class="mana-bar-blue" style="width: 0%;"></div>
+                </div>
+                <div id="heroimg"></div>
             </div>
-            <div id="heroimg"></div>
-        </div>
-        <div id="timer"></div>
-        <div id="boss">
-            <div class="mana-box">
-                <div class="mana-bar" style="width: 0%;"></div>
-                <div class="mana-bar-blue" style="width: 0%;"></div>
+            <div id="timer"></div>
+            <div id="boss">
+                <div class="mana-box">
+                    <div class="mana-bar" style="width: 0%;"></div>
+                    <div class="mana-bar-blue" style="width: 0%;"></div>
+                </div>
+                <div id="bossimg"></div>
             </div>
-            <div id="bossimg"></div>
+    </div>
+    <div id="banner"></div>
+</div>
+    <div class="bottomwrapper">
+        <div class="questcontainer">
+            <div id="question"></div>
+            <div class="answercontainer"></div>
         </div>
     </div>
-
-    <div class="questcontainer">
-        <div id="question"></div>
-        <div class="answercontainer"></div>
-    </div>
-
 </body>
 <footer>
 

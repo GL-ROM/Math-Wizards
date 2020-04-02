@@ -9,18 +9,35 @@
     visibility: hidden;
 }
 
-.playarea {
-    display: flex;
+.upperwrap {
+    position: relative;
+    padding: 0;
+    margin: 0;    
+    background-image: url(../images/backdrop.jpg);
+    background-size: cover;
+    height: 70vh;
 }
 
-.answers:hover {
-    cursor: pointer;
+#banner {
+    height: 100px;
+    width: 100%;
+    background-image: url(../images/grassborder.png);
+    /* texture from para on OpenGameArt.org found at https://opengameart.org/node/15627 */
+    background-size: 500px 100px;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+}
+
+.playarea {
+    display: flex;
+    justify-content: space-between;
 }
 
 .mana-box {
     background-color: #ccc;
-    height: 30px;
-    width: 100px;
+    height: 15px;
+    width: 75px;
     margin: 0 auto;
     border: solid 1px #aaa;
   }
@@ -52,9 +69,15 @@
     transition: all 0.2s;
 }
 
-.answers:hover{
+.answers:hover {
+    cursor: pointer;
     background-color:#4095c6;
     box-shadow: 0 0 15px #463bdf;
+}
+
+.bottomwrapper {
+    background-image: url(../images/stonewall.png);
+    /* Image by Zagreb-Dubrava found on https://www.deviantart.com/zagreb-dubrava/art/Stone-Wall-Texture-2-316985646 */
 }
 
 .questcontainer {
@@ -72,6 +95,7 @@
 
 #question {
     font-size: larger;
-    color: rgb(129, 93, 2);
+    color: rgb(87, 62, 0);
+    padding-bottom: 1%;
 }
 

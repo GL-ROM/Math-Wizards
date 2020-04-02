@@ -111,7 +111,7 @@ const App = {
                     num1 = (num1*num2);
                 }
             }
-            let addQuestion = `${num1} ${object.operator} ${num2}`;
+            let addQuestion = `${num1} ${object.operator} ${num2} `;
             questionArray.push(addQuestion);
             UI.addQuestionDiv();
             App.generateRandoAns();
