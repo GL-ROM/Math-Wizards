@@ -1,23 +1,23 @@
+/* Testing and border visibility while arranging */
 * {
-    border: 1px blueviolet solid;
-    /* font-family: 'Lobster Two', cursive; */
+    /* border: 1px blueviolet solid;  */
     font-family: 'Uncial Antiqua', cursive;
     text-align: center;
 }
+
+/* Used body to fit the game specifically so it doenst stretch too much. Unfortunately not really responsive.  */
 body {
     width: 880px;
-    height: 970px;
+    height: fit-content;
     border: 2px black solid;
     margin: auto;
 }
+/* Title for game */
 h1 {
     text-shadow: 2px 2px gray;
+    margin-top: 0;
 }
-
-.modalcontainer {
-    visibility: hidden;
-}
-
+/* Upper container where most of the visuals reside for the game itself */
 .upperwrap {
     position: relative;
     padding: 0;
@@ -28,22 +28,17 @@ h1 {
     height: 70vh;
 }
 
-#banner {
-    height: 100px;
-    width: 100%;
-    background-image: url(../images/grassborder.png);
-    /* texture from para on OpenGameArt.org found at https://opengameart.org/node/15627 */
-    background-size: 500px 100px;
-    position: absolute;
-    bottom: 0;
-    margin: 0;
-}
-
+/* Main area used to house the boss and hero along with their mana bars */
 .playarea {
     display: flex;
     justify-content: space-between;
 }
-
+/* Names for the characters to display above their heads */
+.heroName, .bossName {
+    text-shadow: 1px 1px rgb(5, 5, 5);
+    color: rgb(184, 0, 230);
+}
+/* Growing mana box */
 .mana-box {
     /* visibility: hidden; */
     background-color: rgba(167, 163, 163, 0.425);
@@ -57,49 +52,43 @@ h1 {
 .mana-bar {
     background-color: #044fb1;
     width: 100%;
-    height: 13px;
+    height: 15px;
     position: relative;
   }
-
+/* positioning for hero box*/
 #hero {
     position: absolute;
     bottom: 100px;
     left: 100px;   
 }
-
-#heroimg {
-    content: url(../images/0.png);
+/* size of hero image */
+#hero img {
     height: 200px;
     width: 200px;
 }
-
+/* positioning for boss box */
 #boss {
     position: absolute;
     bottom: 100px;
     right: 100px;
 }
-
+/* size of hero image */
 #boss img {
     /* content: url('../images/pythagoras.png'); */
     height: 200px;
     width: 200px;
 }
 
-.answers {
-    padding:0.3em 1.2em;
-    margin:0.3em;
-    border-radius:.3em;
-    font-weight:300;
-    color:#FFFFFF;
-    background-color:#014491;
-    text-align:center;
-    transition: all 0.2s;
-}
-
-.answers:hover {
-    cursor: pointer;
-    background-color:#4095c6;
-    box-shadow: 0 0 15px #463bdf;
+/* Used for grass and mud graphic Porbably a better way to do it but this was my so */
+#banner {
+    height: 100px;
+    width: 100%;
+    background-image: url(../images/grassborder.png);
+    /* texture from para on OpenGameArt.org found at https://opengameart.org/node/15627 */
+    background-size: 500px 100px;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
 }
 
 .bottomwrapper {
@@ -107,6 +96,7 @@ h1 {
     /* Image by Zagreb-Dubrava found on https://www.deviantart.com/zagreb-dubrava/art/Stone-Wall-Texture-2-316985646 */
 }
 
+/* container for questions and buttons */
 .questcontainer {
     display: flex;
     flex-direction: column;
@@ -119,11 +109,91 @@ h1 {
     justify-content: center;
     align-items: center;
 }
-
+/* The equation that will be displayed */
 #question {
     font-size: xx-large;
     color: rgb(87, 62, 0);
     padding-bottom: 1%;
+}
+/* answer button layout and look */
+.answers {
+    padding:0.3em 1.2em;
+    margin:0.3em;
+    border-radius:.3em;
+    font-weight: bolder;
+    color:#FFFFFF;
+    background-color:#014491;
+    text-align:center;
+    transition: all 0.2s;
+}
+/* hover effect for the buttons */
+.answers:hover {
+    cursor: pointer;
+    background-color:#4095c6;
+    box-shadow: 0 0 15px #463bdf;    
+}
+
+
+/* Modal setups and design */
+#startgame, #gameover, #bossDefeat {
+    display: block;
+}
+
+#startgame, #gameover, #bossDefeat {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modalstartcontent, .modalgameover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 3px black solid;
+    border-radius: 2%;
+    margin: 30% auto;
+    width: 70%;
+    box-shadow: 0px 8px 8px 0px goldenrod;
+    padding: 10px;
+}
+
+.modalstartcontent p, .modalgameover p, .defeatcontent p {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.difficultyBTN {
+    padding:0.3em 1.2em;
+    margin:0.3em;
+    border-radius:.3em;
+    font-weight: bolder;
+}
+
+#easy:hover {
+    cursor: pointer;
+    background-color:#463bdf;
+    box-shadow: 0 0 15px #463bdf;    
+}
+
+#normal:hover {
+    cursor: pointer;
+    background-color:#a78906;
+    box-shadow: 0 0 15px #a78906;    
+}
+
+#hard:hover {
+    cursor: pointer;
+    background-color:#960000;
+    box-shadow: 0 0 15px #960000;    
+}
+
+#restart:hover {
+    cursor: pointer;
+    background-color:#be9200;
+    box-shadow: 0 0 15px #76d8df;    
 }
 
 /* pythagoras image from https://www.cleanpng.com/png-pythagorean-theorem-mathematics-mathematical-proof-1970329/download-png.html */

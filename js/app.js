@@ -37,7 +37,7 @@ const multiplyBoss = {
 }
 
 const divideBoss = {
-    name: 'Ulugh Beg',
+    name: 'Sir Isaac Newton',
     mana: 0,
     operator: '/',
     wittyRemarks: [],
@@ -58,7 +58,7 @@ const pemdasBoss = {
 let questionArray = [];
 let answerArray = [];
 let bossArray = [additionBoss, subtractionBoss, multiplyBoss, divideBoss];
-let bossImgArray = ['images/pythagoras.png', 'images/Euclid.png','images/Archimedes.png', 'images/UlughBeg.png'];
+let bossImgArray = ['images/pythagoras.png', 'images/Euclid.png','images/Archimedes.png', 'images/Newton.png'];
 let difficultyNumber = 10;
 let correctChoice = 0;
 let $bossImage = $('#bossimg');
@@ -83,9 +83,30 @@ const EventHandlers = {
         $('.answers').css('pointer-events', 'none');
         setTimeout(App.nextQuestion, 1500);
     },
+    // 
+    changeDifficulty: (event) => {
+        let choice = $(event.currentTarget).attr('value');
+        if (choice === 'EASY') {
+            difficultyNumber = 10;
+            App.gameStart();
+            UI.gameStartModal();
+        } else if (choice === 'NORMAL') {
+            difficultyNumber = 100;
+            App.gameStart();
+            UI.gameStartModal();
+        } else if (choice === 'HARD') {
+            difficultyNumber = 1000;
+            App.gameStart();
+            UI.gameStartModal();
+        }
+    },
     // Sets the listener on the children of my answercontainer everytime they get intiated (delegation)
     setAnsEvent: () => {
         $('.answercontainer').on('click', '.answers', EventHandlers.onClickCheckAnswer);
+    },
+    // 
+    startDifficulty: () => {
+        $('.modalstartcontent').on('click', '.difficultyBTN', EventHandlers.changeDifficulty);
     }
 }
 
@@ -220,7 +241,7 @@ const App = {
         questionArray = [];
         answerArray = [];
         bossArray = [additionBoss, subtractionBoss, multiplyBoss, divideBoss];
-        bossImgArray = ['images/pythagoras.png', 'images/Euclid.png','images/Archimedes.png', 'images/UlughBeg.png'];
+        bossImgArray = ['images/pythagoras.png', 'images/Euclid.png','images/Archimedes.png', 'images/Newton.png'];
         difficultyNumber = 10;
         correctChoice = 0;
         App.manaReset();
@@ -268,11 +289,16 @@ const UI = {
         bossImgArray.shift();
         $('#boss img').attr('src', bossImgArray[0]);
         $('.bossName').text(bossArray[0].name);
+    },
+    // Game Start Modal
+    gameStartModal: () => {
+        $('.playarea').toggle();    
+        $('#startgame').toggle();
+        EventHandlers.startDifficulty();
     }
 }
 
 // jQuery Onload
 $(() => {
-    App.gameStart();
-    console.log(bossImgArray[0])
+    UI.gameStartModal();
 })

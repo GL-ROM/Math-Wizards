@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Wizards</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -22,7 +22,7 @@
                 <div class="mana-box">
                     <div class="mana-bar" id="heroMana" style="width: 0%;"></div>
                 </div>
-                <div id="heroimg"></div>
+                <img src="images/0.png" alt="">
             </div>
             <div id="magic"></div>
             <div id="boss">
@@ -43,17 +43,31 @@
         </div>
     </div>
 
-     <!-- Game start message for modal-->
-     <div id="startgame" class="modalcontainer">
-        <div class="startgame"></div>
-        <button class='button' id='easy'>EASY</button>
-        <button class='button' id='normal'>NORMAL</button>
-        <button class='button' id='hard'>HARD</button>
+    <!-- Game start message for modal-->
+    <div id="startgame" class="modalcontainer">
+        <div class="modalstartcontent">
+            <p>Welcome to Math Wizards!</p>
+            <p>Objective: Solve Math Equations to Gain Mana and Vanquish</p>
+            <p>The Powerful Founding Fathers of Math Wizardry!</p>
+            <p>Select a Difficulty:</p>
+            <button class='difficultyBTN' value='EASY' id='easy'>EASY</button>
+            <button class='difficultyBTN' value='NORMAL' id='normal'>NORMAL</button>
+            <button class='difficultyBTN' value='HARD' id='hard'>HARD</button>
+        </div>
     </div>
 
     <!-- Game over message for Modal-->
     <div id="gameover" class="modalcontainer">
-        <div class="gameover"></div>
+        <div class="modalgameover">
+            <p>Game Over!</p>
+            <p>Try again?</p>
+            <button class='difficultyBTN'id='restart'>Restart</button>
+        </div>
+    </div>
+
+    <!-- Boss Defeated Modal -->
+    <div id="bossDefeat">
+        <div class="defeatcontent"></div>
     </div>
 
 </body>
