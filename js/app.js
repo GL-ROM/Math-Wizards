@@ -1,9 +1,12 @@
 //// Project 1
 ///////////////////////
 
+///////////////////////
 // Objects
+///////////////////////
+
 const hero = {
-    name: 'Test',
+    name: 'Hero',
     mana: 0,
     critChance: .1,
     wittyRemarks: []
@@ -13,45 +16,58 @@ const additionBoss = {
     name: 'Pythagoras',
     mana: 0,
     operator: '+',
-    wittyRemarks: []
+    wittyRemarks: [],
+    boss: true
 }
 
 const subtractionBoss = {
     name: 'Euclid',
     mana: 0,
     operator: '-',
-    wittyRemarks: []
+    wittyRemarks: [],
+    boss: true
 }
 
 const multiplyBoss = {
     name: 'Archimedes',
     mana: 0,
     operator: '*',
-    wittyRemarks: []
+    wittyRemarks: [],
+    boss: true
 }
 
 const divideBoss = {
     name: 'Ulugh Beg',
     mana: 0,
     operator: '/',
-    wittyRemarks: []
+    wittyRemarks: [],
+    boss: true
 }
 // Possible final boss but will come back to it
 const pemdasBoss = {
     name: 'Brahmagupta',
     mana: 0,
-    wittyRemarks: []
+    wittyRemarks: [],
+    boss: true
 }
 
+///////////////////////
 // Global Use Variables
+///////////////////////
+
 let questionArray = [];
 let answerArray = [];
 let bossArray = [additionBoss, subtractionBoss, multiplyBoss, divideBoss];
+let bossImgArray = ['images/pythagoras.png', 'images/Euclid.png','images/Archimedes.png', 'images/UlughBeg.png'];
 let difficultyNumber = 10;
 let correctChoice = 0;
+let $bossImage = $('#bossimg');
 
+////////////////////////////
 // Functions for the Game to run (mostly put inside of objects to call)
 // Object containing my event handlers for DOM
+////////////////////////////
+
 const EventHandlers = {
     //The event used to check if the answer is correct or not by comparing the global variable to the choice
     onClickCheckAnswer: (event) => {
@@ -73,7 +89,10 @@ const EventHandlers = {
     }
 }
 
+////////////////////////////
 // App logic and game events
+////////////////////////////
+
 const App = {
 
     // Provide a random numbder inclusive of the min and max value provided
@@ -117,7 +136,7 @@ const App = {
             App.generateRandoAns();
         }
     },
-    //
+    //Shifts to the next question by chaining functions
     nextQuestion: () => {
         App.manaFilled();
         questionArray.shift();
@@ -178,18 +197,20 @@ const App = {
     // Used to incriment the mana for hero or boss depending
     addMana: (object) => {
         object.mana += 10;
+        UI.manaBarIncrease(object);
     },
     // Reset the amound of mana
     manaReset: () => {
         hero.mana = 0;
         bossArray[0].mana = 0;
+        UI.manaBarReset();
     },
     // Shift to the next boss and check if they are all defeated
     bossShift: () => {
         if (bossArray.length < 2 || bossArray[0] == undefined){
             console.log('You Beat the Math Wizards!');
         } else {
-            bossArray.shift();
+            UI.bossRotate();
             App.manaReset();
             App.generateQuestion(bossArray[0]);
         }
@@ -199,6 +220,7 @@ const App = {
         questionArray = [];
         answerArray = [];
         bossArray = [additionBoss, subtractionBoss, multiplyBoss, divideBoss];
+        bossImgArray = ['images/pythagoras.png', 'images/Euclid.png','images/Archimedes.png', 'images/UlughBeg.png'];
         difficultyNumber = 10;
         correctChoice = 0;
         App.manaReset();
@@ -206,7 +228,9 @@ const App = {
     // Starts the game
     gameStart: () => {
         App.generateQuestion(bossArray[0]);
-        EventHandlers.setAnsEvent();  
+        EventHandlers.setAnsEvent();
+        $('#boss img').attr('src', bossImgArray[0]);
+        $('.bossName').text(bossArray[0].name);  
     }
 }
 
@@ -223,10 +247,32 @@ const UI = {
         for (let i = 0; i < answerArray.length; i++) {
             $('.answercontainer').append(`<button class='answers' value='${answerArray[i]}'> ${answerArray[i]} </button>`);
         }
+    },
+    // Mana bar increase for foe or hero
+    manaBarIncrease: (object) => {
+        let mana = object.mana * (100 / 20);
+        if (object.name === 'Hero') {
+            $('#heroMana').animate({ 'width': mana + '%'}, 700);
+        } else if (object.boss = true) {
+            $('#bossMana').animate({'width': mana + "%"}, 700);
+        }       
+    },
+    // Mana bar reset to 0 visually
+    manaBarReset: () => {
+        $('#heroMana').css('width', '0%');
+        $('#bossMana').css('width', '0%');
+    },
+    // Boss Rotation for image and name and stats
+    bossRotate: () => {
+        bossArray.shift();
+        bossImgArray.shift();
+        $('#boss img').attr('src', bossImgArray[0]);
+        $('.bossName').text(bossArray[0].name);
     }
 }
 
 // jQuery Onload
 $(() => {
     App.gameStart();
+    console.log(bossImgArray[0])
 })

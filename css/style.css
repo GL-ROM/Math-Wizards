@@ -1,8 +1,17 @@
 * {
-    /* border: 1px blueviolet solid; */
+    border: 1px blueviolet solid;
     /* font-family: 'Lobster Two', cursive; */
     font-family: 'Uncial Antiqua', cursive;
     text-align: center;
+}
+body {
+    width: 880px;
+    height: 970px;
+    border: 2px black solid;
+    margin: auto;
+}
+h1 {
+    text-shadow: 2px 2px gray;
 }
 
 .modalcontainer {
@@ -14,6 +23,7 @@
     padding: 0;
     margin: 0;    
     background-image: url(../images/backdrop.jpg);
+    /* image source from https://www.gamedevmarket.net/ */
     background-size: cover;
     height: 70vh;
 }
@@ -35,28 +45,45 @@
 }
 
 .mana-box {
-    background-color: #ccc;
+    /* visibility: hidden; */
+    background-color: rgba(167, 163, 163, 0.425);
     height: 15px;
     width: 75px;
+    border-radius: 10%;
     margin: 0 auto;
-    border: solid 1px #aaa;
+    border: solid 2px rgb(12, 2, 2);
   }
 
 .mana-bar {
     background-color: #044fb1;
-    width: inherit;
-    height: 28px;
+    width: 100%;
+    height: 13px;
     position: relative;
-    bottom: 56px;
   }
 
-.mana-bar-blue {
-    width: 100%;
-    height: 100%;
-    background-color: #3bd3df;
-    bottom: 28px;
-    position: relative;
-  }
+#hero {
+    position: absolute;
+    bottom: 100px;
+    left: 100px;   
+}
+
+#heroimg {
+    content: url(../images/0.png);
+    height: 200px;
+    width: 200px;
+}
+
+#boss {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+}
+
+#boss img {
+    /* content: url('../images/pythagoras.png'); */
+    height: 200px;
+    width: 200px;
+}
 
 .answers {
     padding:0.3em 1.2em;
@@ -94,8 +121,10 @@
 }
 
 #question {
-    font-size: larger;
+    font-size: xx-large;
     color: rgb(87, 62, 0);
     padding-bottom: 1%;
 }
 
+/* pythagoras image from https://www.cleanpng.com/png-pythagorean-theorem-mathematics-mathematical-proof-1970329/download-png.html */
+/* Archimedes image from http://www.historysalive.com/math.html */
