@@ -3,7 +3,7 @@
 
 # Math Wizards
 ## Concept: 
-The game is an edutainment math practice game. You must solve math problems to build up "mana" 
+The game is an edutainment math practice game. You must solve math problems to build up "mana" and defeat the math wizards. There are 4 rounds with a different math operator in each.
 ## Technologies Used:
     - JQuery - JavaScript - HTML - CSS - Google Fonts 
     - GIMP  
