@@ -133,7 +133,6 @@ h1 {
     box-shadow: 0 0 15px #463bdf;    
 }
 
-
 /* Modal setups and design */
 #startgame, #gameover, #bossDefeat {
     display: block;
@@ -150,7 +149,7 @@ h1 {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modalstartcontent, .modalgameover {
+.modalstartcontent, .modalgameover, .defeatcontent{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border: 3px black solid;
@@ -190,7 +189,7 @@ h1 {
     box-shadow: 0 0 15px #960000;    
 }
 
-#restart:hover {
+#restart:hover, #confirm:hover {
     cursor: pointer;
     background-color:#be9200;
     box-shadow: 0 0 15px #76d8df;    

@@ -72,6 +72,7 @@ const EventHandlers = {
     //The event used to check if the answer is correct or not by comparing the global variable to the choice
     onClickCheckAnswer: (event) => {
         // console.log(correctChoice);
+        event.preventDefault();
         let $value = parseInt($(event.currentTarget).attr('value'));
         if($value === correctChoice) {
             $(event.currentTarget).css('background-color', 'green');
@@ -83,19 +84,23 @@ const EventHandlers = {
         $('.answers').css('pointer-events', 'none');
         setTimeout(App.nextQuestion, 1500);
     },
-    // 
+    // Resets the game stats and sets the difficulty
     changeDifficulty: (event) => {
+        event.preventDefault();
         let choice = $(event.currentTarget).attr('value');
         if (choice === 'EASY') {
+            // App.resetGame();
             difficultyNumber = 10;
             App.gameStart();
             UI.gameStartModal();
         } else if (choice === 'NORMAL') {
-            difficultyNumber = 100;
+            // App.resetGame();
+            difficultyNumber = 50;
             App.gameStart();
             UI.gameStartModal();
         } else if (choice === 'HARD') {
-            difficultyNumber = 1000;
+            // App.resetGame();
+            difficultyNumber = 100;
             App.gameStart();
             UI.gameStartModal();
         }
@@ -104,9 +109,17 @@ const EventHandlers = {
     setAnsEvent: () => {
         $('.answercontainer').on('click', '.answers', EventHandlers.onClickCheckAnswer);
     },
-    // 
+    // Activates listeners for difficulty buttons
     startDifficulty: () => {
         $('.modalstartcontent').on('click', '.difficultyBTN', EventHandlers.changeDifficulty);
+    },
+    // Moves onto the next boss after continue
+    confirmDefeat: () => {
+        $('#confirm').on('click', App.nextBoss);
+    },
+    // Restart button
+    restartGame: () => {
+        $('#restart').on('click', UI.gameStartModal);
     }
 }
 
@@ -200,12 +213,11 @@ const App = {
     // Check to see who wins
     manaFilled: () => {
         if (App.manaCheck(hero) === true) {
-            console.log('You Defeated ' + bossArray[0].name); // Placeholder for Modal
             App.bossShift();
         } else if (App.manaCheck(bossArray[0]) === true) {
-            console.log('You were defeated!'); // Placeholder for modal
             App.resetGame();
-            App.gameStart();
+            UI.gameOverModal();
+            // UI.gameStartModal();
         }
     },
     // Win condition check used on hero and boss
@@ -229,12 +241,17 @@ const App = {
     // Shift to the next boss and check if they are all defeated
     bossShift: () => {
         if (bossArray.length < 2 || bossArray[0] == undefined){
-            console.log('You Beat the Math Wizards!');
+            UI.gameOverModal();
         } else {
-            UI.bossRotate();
-            App.manaReset();
-            App.generateQuestion(bossArray[0]);
+            UI.bossDefeatedModal();
         }
+    },
+    // Combined functions to setup next boss, called on event handler
+    nextBoss: () => {
+        UI.bossRotate();
+        App.manaReset();
+        App.generateQuestion(bossArray[0]);
+        UI.bossDefeatedModal();
     },
     // Reset Game State to beginning
     resetGame: () => {
@@ -246,13 +263,17 @@ const App = {
         correctChoice = 0;
         App.manaReset();
     },
-    // Starts the game
+    // Starts the game logic
     gameStart: () => {
         App.generateQuestion(bossArray[0]);
-        EventHandlers.setAnsEvent();
         $('#boss img').attr('src', bossImgArray[0]);
         $('.bossName').text(bossArray[0].name);  
-    }
+    },
+    // Restart the game
+    // gameRestart: () => {
+    //     App.gameStart();
+    //     UI.gameStartModal();
+    // }
 }
 
 const UI = {
@@ -292,13 +313,32 @@ const UI = {
     },
     // Game Start Modal
     gameStartModal: () => {
+        $('#gameover').hide();
         $('.playarea').toggle();    
         $('#startgame').toggle();
+        $('#question').toggle();
+        $('.answercontainer').toggle();
         EventHandlers.startDifficulty();
+    },
+    // Boss Defeat Modal
+    bossDefeatedModal: () => {
+        $('.playarea').toggle();
+        $('.defeatcontent').html(`<p> Congratulations! You defeated ${bossArray[0].name}. </p>
+                                  <button class='difficultyBTN' id='confirm'>Continue...</button>
+                                `);
+        $('#bossDefeat').toggle();
+        EventHandlers.confirmDefeat();
+    },
+    // Game over Modal
+    gameOverModal: () => {
+        $('.answercontainer').empty();
+        $('#gameover').toggle();
+        EventHandlers.restartGame();
     }
 }
 
 // jQuery Onload
 $(() => {
+    EventHandlers.setAnsEvent();
     UI.gameStartModal();
 })
