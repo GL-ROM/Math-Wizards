@@ -89,20 +89,23 @@ const EventHandlers = {
         event.preventDefault();
         let choice = $(event.currentTarget).attr('value');
         if (choice === 'EASY') {
-            // App.resetGame();
+            App.resetGame();
             difficultyNumber = 10;
             App.gameStart();
-            UI.gameStartModal();
+            $('#startgame').hide();
+            UI.showGameBoard();
         } else if (choice === 'NORMAL') {
-            // App.resetGame();
+            App.resetGame();
             difficultyNumber = 50;
             App.gameStart();
-            UI.gameStartModal();
+            $('#startgame').hide();
+            UI.showGameBoard();
         } else if (choice === 'HARD') {
-            // App.resetGame();
+            App.resetGame();
             difficultyNumber = 100;
             App.gameStart();
-            UI.gameStartModal();
+            $('#startgame').hide();
+            UI.showGameBoard();
         }
     },
     // Sets the listener on the children of my answercontainer everytime they get intiated (delegation)
@@ -242,6 +245,7 @@ const App = {
     bossShift: () => {
         if (bossArray.length < 2 || bossArray[0] == undefined){
             UI.gameOverModal();
+            $('.modalgameover p:first-child').text('Congratulations!');
         } else {
             UI.bossDefeatedModal();
         }
@@ -314,11 +318,10 @@ const UI = {
     // Game Start Modal
     gameStartModal: () => {
         $('#gameover').hide();
-        $('.playarea').toggle();    
-        $('#startgame').toggle();
-        $('#question').toggle();
-        $('.answercontainer').toggle();
-        EventHandlers.startDifficulty();
+        $('.playarea').hide();    
+        $('#startgame').show();
+        $('#question').hide();
+        $('.answercontainer').hide();
     },
     // Boss Defeat Modal
     bossDefeatedModal: () => {
@@ -331,14 +334,25 @@ const UI = {
     },
     // Game over Modal
     gameOverModal: () => {
-        $('.answercontainer').empty();
+        // $('.answercontainer').empty();
         $('#gameover').toggle();
-        EventHandlers.restartGame();
+        $('#question').hide();
+        $('.answercontainer').hide();
+        App.resetGame();
+    },
+    //
+    showGameBoard: () => {
+        $('.playarea').show();
+        $('#question').show();
+        $('.answercontainer').show();
     }
 }
 
 // jQuery Onload
 $(() => {
     EventHandlers.setAnsEvent();
+    EventHandlers.startDifficulty();
+    EventHandlers.restartGame();
+    EventHandlers.confirmDefeat();
     UI.gameStartModal();
 })
