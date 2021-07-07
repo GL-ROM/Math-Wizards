@@ -1,4 +1,4 @@
-# GabRom-187.github.io
+# https://gl-rom.github.io/Math-Wizards/
 
 
 # Math Wizards
@@ -20,4 +20,4 @@ Another challenge was realizing that calling event listeners a bunch of times is
 ## Additional information: 
 This project was a great learning piece, as most of my discoveries came from thought out approaches and troubleshooting. Tons of mispelling mistakes and repition but I feel like I took away a lot from the project itself. 
 ## App Demo 
-My Demo can be found here: https://gabrom-187.github.io/Gab-Rom-187.github.io/
+My Demo can be found here: https://gl-rom.github.io/Math-Wizards/
